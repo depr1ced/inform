@@ -83,21 +83,6 @@
       z-index:2;
       filter: saturate(1.15);
     }
-    .rgb-glow{
-      position:absolute;
-      left:-10%;
-      top:50%;
-      width:120%;
-      height:18px;
-      transform:translateY(-50%);
-      border-radius:999px;
-      filter: blur(10px) opacity(0.7);
-      background:linear-gradient(90deg,#ff4da6 0%, #8b5cf6 40%, #06b6d4 70%, #3b82f6 100%);
-      background-size:200% 100%;
-      animation: moveGradient 3s linear infinite;
-      z-index:1;
-    }
-    @keyframes moveGradient{ 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
     /* Social buttons */
     .links{display:flex;flex-direction:column;gap:10px}
@@ -146,18 +131,17 @@
       <div>
         <!-- ИМЯ: поменяй текст ниже -->
         <div class="name" id="displayName">Твоё имя или ник</div>
-        <div class="subtitle" id="ageAndShort">19 лет • Краткая биография</div>
+        <div class="subtitle" id="ageAndShort">хз лет • Краткая биография</div>
       </div>
     </header>
 
     <!-- Биография -->
     <section class="bio" id="bioText">
-      Рафик чорт
+      Рафик чорт чорто
     </section>
 
     <!-- RGB line with glow -->
     <div class="rgb-line-wrap" aria-hidden="true">
-      <div class="rgb-glow"></div>
       <div class="rgb-line"></div>
     </div>
 
