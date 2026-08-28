@@ -19,7 +19,7 @@ REDIRECT_URI = os.getenv("TIKTOK_REDIRECT_URI", f"{PUBLIC_BASE_URL}/tiktok/callb
 SCOPES = "user.info.basic,video.list"
 
 BASE_DIR = Path(__file__).resolve().parent
-HTML_FILE = BASE_DIR / "tiktok.html"
+HTML_FILE = BASE_DIR / "index.html"
 TOKEN_FILE = BASE_DIR / "tiktok_tokens.json"
 
 def render_page(status="not_connected", message="TikTok не подключён"):
