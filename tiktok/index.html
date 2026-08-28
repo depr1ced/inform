@@ -1,117 +1,840 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DEPRICED — TikTok Integration</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:#000;color:#fff;min-height:100vh;display:flex;justify-content:center;align-items:center;overflow-x:hidden;position:relative;padding:40px 20px}
-#bgCanvas{position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;background:#030303}
-.layout-grid{width:100%;max-width:1100px;display:grid;grid-template-columns:1fr 1fr;gap:24px;z-index:1;align-items:start}
-.column{display:flex;flex-direction:column;gap:24px}
-.block-card{background:#050505;border:1px solid #3b0764;border-radius:24px;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
-.section-title{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:#71717a;margin-bottom:20px}
-.profile-header{display:flex;align-items:center;gap:25px}
-.avatar{width:110px;height:110px;border-radius:50%;border:2px solid #581c87;background:radial-gradient(circle at 35% 30%,#7c3aed,transparent 35%),linear-gradient(145deg,#160525,#050505 65%);display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:900;flex-shrink:0}
-.profile-info{flex:1}
-.profile-name{font-size:2rem;font-weight:800;margin-bottom:8px;background:linear-gradient(90deg,#fff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.profile-desc{color:#a1a1aa;font-size:.9rem;line-height:1.5;margin-bottom:15px}
-.status{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;font-size:.82rem;font-weight:700;border:1px solid #3f3f46;color:#d4d4d8;background:#09090b}
-.status:before{content:"";width:8px;height:8px;border-radius:50%;background:#71717a}
-.status.connected{color:#d8b4fe;border-color:#581c87;background:rgba(88,28,135,.18)}
-.status.connected:before{background:#a78bfa;box-shadow:0 0 12px rgba(167,139,250,.65)}
-.status.error{color:#fecaca;border-color:#7f1d1d;background:rgba(127,29,29,.18)}
-.status.error:before{background:#ef4444}
-.tiktok-login{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#050505;border:1px solid #fff;padding:15px 20px;border-radius:16px;text-decoration:none;font-size:.95rem;font-weight:800;transition:.25s}
-.tiktok-login:hover{transform:translateY(-2px);box-shadow:-4px 4px 0 #25f4ee,4px -4px 0 #fe2c55}
-.footer-note{margin-top:16px;font-size:.75rem;color:#52525b;line-height:1.5}
-.links-container{display:flex;flex-direction:column;gap:12px}
-.link-item{display:flex;align-items:center;justify-content:space-between;background:#0a0a0c;border:1px solid #2e1065;border-radius:16px;padding:20px 25px;text-decoration:none;color:#fff;transition:.3s}
-.link-item:hover{transform:translateY(-2px)}
-.link-item.tiktok:hover{border-color:#fe2c55;background:rgba(254,44,85,.04)}
-.link-title{font-size:1.05rem;font-weight:700}
-.link-subtitle{display:block;font-size:.8rem;color:#71717a;font-weight:400;margin-top:4px}
-.link-icon{color:#71717a;font-size:1.2rem}
-.specs-list{display:flex;flex-direction:column}
-.spec-item{display:flex;flex-direction:column;justify-content:center;padding:16px 0;border-bottom:1px solid rgba(88,28,135,.2);transition:padding-left .3s}
-.spec-item:hover{padding-left:10px}
-.spec-item:last-child{border-bottom:none}
-.spec-label{color:#71717a;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-.spec-value{color:#e4e4e7;font-size:1rem;font-weight:600;word-break:break-word}
-.notice{color:#a1a1aa;line-height:1.6;font-size:.85rem}
-.notice strong{color:#e4e4e7}
-@media(max-width:900px){.layout-grid{grid-template-columns:1fr}body{align-items:flex-start}}
-@media(max-width:600px){.profile-header{flex-direction:column;text-align:center}.block-card{padding:24px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Depriced | TikTok Integration</title>
+
+    <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/depr1ced/direct-link-page/refs/heads/main/Depriced%20Logo%20Small.png">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            padding: 40px 20px;
+        }
+
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background-color: #030303;
+        }
+
+        .layout-grid {
+            width: 100%;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            z-index: 1;
+            align-items: start;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .block-card {
+            background: #050505;
+            border: 1px solid #3b0764;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-title {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #71717a;
+            margin-bottom: 20px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            height: auto;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 2px solid #581c87;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, #ffffff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .profile-desc {
+            color: #a1a1aa;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .contact-btns {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-outline {
+            background: #000;
+            color: #fff;
+            border: 1px solid #581c87;
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .btn-outline.tg-btn:hover {
+            background: rgba(36, 161, 222, 0.1);
+            border-color: #24a1de;
+        }
+
+        .btn-outline.mail-btn:hover {
+            background: rgba(168, 85, 247, 0.1);
+            border-color: #c084fc;
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0a0a0c;
+            border: 1px solid #2e1065;
+            border-radius: 16px;
+            padding: 20px 25px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .link-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .link-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .link-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .link-subtitle {
+            display: block;
+            font-size: 0.8rem;
+            color: #71717a;
+            font-weight: 400;
+            margin-top: 4px;
+        }
+
+        .link-icon {
+            color: #71717a;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .link-item.telegram:hover {
+            border-color: #24a1de;
+            background: rgba(36, 161, 222, 0.04);
+        }
+        .link-item.telegram:hover .link-icon { color: #24a1de; }
+
+        .link-item.tiktok:hover {
+            border-color: #fe2c55;
+            background: rgba(254, 44, 85, 0.04);
+        }
+        .link-item.tiktok:hover .link-icon { color: #fe2c55; }
+
+        .link-item.twitch:hover {
+            border-color: #9146ff;
+            background: rgba(145, 70, 255, 0.04);
+        }
+        .link-item.twitch:hover .link-icon { color: #9146ff; }
+
+        .link-item.donate:hover {
+            border-color: #ff7300;
+            background: rgba(255, 115, 0, 0.04);
+        }
+        .link-item.donate:hover .link-icon { color: #ff7300; }
+
+        /* TikTok Integration */
+        .tiktok-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tiktok-card::before {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            right: -90px;
+            top: -110px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(145, 70, 255, 0.18), transparent 70%);
+            pointer-events: none;
+        }
+
+        .integration-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .integration-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid #3f3f46;
+            background: #09090b;
+            color: #d4d4d8;
+            font-size: 0.78rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #71717a;
+        }
+
+        .status.connected {
+            color: #d8b4fe;
+            border-color: #581c87;
+            background: rgba(88, 28, 135, 0.18);
+        }
+
+        .status.connected::before {
+            background: #a78bfa;
+            box-shadow: 0 0 12px rgba(167, 139, 250, 0.65);
+        }
+
+        .status.error {
+            color: #fecaca;
+            border-color: #7f1d1d;
+            background: rgba(127, 29, 29, 0.18);
+        }
+
+        .status.error::before {
+            background: #ef4444;
+        }
+
+        .integration-desc {
+            color: #a1a1aa;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .tiktok-login {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 15px 18px;
+            border-radius: 16px;
+            background: #fff;
+            color: #050505;
+            border: 1px solid #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 800;
+            transition: all 0.25s ease;
+        }
+
+        .tiktok-login:hover {
+            transform: translateY(-2px);
+            box-shadow: -4px 4px 0 #25f4ee, 4px -4px 0 #fe2c55;
+        }
+
+        .permission-list {
+            display: flex;
+            flex-direction: column;
+            margin-top: 22px;
+            border-top: 1px solid rgba(88, 28, 135, 0.25);
+        }
+
+        .permission-item {
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(88, 28, 135, 0.2);
+        }
+
+        .permission-item:last-child {
+            border-bottom: none;
+        }
+
+        .permission-name {
+            color: #e4e4e7;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .permission-desc {
+            display: block;
+            color: #71717a;
+            font-size: 0.78rem;
+            margin-top: 5px;
+            line-height: 1.45;
+        }
+
+        .oauth-box {
+            background: #09090b;
+            border: 1px solid #2e1065;
+            border-radius: 16px;
+            padding: 18px;
+            margin-top: 18px;
+        }
+
+        .oauth-row + .oauth-row {
+            margin-top: 14px;
+        }
+
+        .oauth-label {
+            color: #71717a;
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .oauth-value {
+            color: #e4e4e7;
+            font-size: 0.88rem;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .security-note {
+            color: #71717a;
+            font-size: 0.76rem;
+            line-height: 1.55;
+            margin-top: 16px;
+        }
+
+        .security-note strong {
+            color: #a1a1aa;
+        }
+
+        /* Setup tabs */
+        .tabs-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(88, 28, 135, 0.3);
+            padding-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: transparent;
+            color: #71717a;
+            border: 1px solid transparent;
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            color: #fff;
+            background: rgba(88, 28, 135, 0.15);
+        }
+
+        .tab-btn.active {
+            color: #a78bfa;
+            background: rgba(88, 28, 135, 0.3);
+            border-color: #581c87;
+        }
+
+        .tabs-content-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .specs-list {
+            display: none;
+            flex-direction: column;
+            gap: 0;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .specs-list.active {
+            display: flex;
+        }
+
+        .specs-list.fade-in {
+            opacity: 1;
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(88, 28, 135, 0.2);
+            transition: padding-left 0.3s ease;
+        }
+
+        .spec-item:hover {
+            padding-left: 10px;
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            color: #71717a;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .spec-value {
+            color: #e4e4e7;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-btns {
+                justify-content: center;
+            }
+
+            .integration-head {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<canvas id="bgCanvas"></canvas>
-<main class="layout-grid">
-<section class="column">
-<div class="block-card">
-<div class="profile-header">
-<div class="avatar">D</div>
-<div class="profile-info">
-<div class="profile-name">𓆩 DEPRICED 𓆪</div>
-<div class="profile-desc">TikTok integration for 𓆩 DEPRICED LIVE BOT 𓆪. Авторизация нужна для чтения списка опубликованных видео и автоматических уведомлений в Discord и Telegram.</div>
-<span class="status __STATUS_CLASS__">__STATUS_TEXT__</span>
-</div>
-</div>
-</div>
+    <canvas id="bgCanvas"></canvas>
 
-<div class="block-card">
-<div class="section-title">Подключение</div>
-<a class="tiktok-login" href="/tiktok/login"><span>♪</span> Продолжить с TikTok</a>
-<div class="footer-note">После нажатия ты перейдёшь на официальный сайт TikTok. Пароль TikTok не передаётся DEPRICED BOT.</div>
-</div>
+    <div class="layout-grid">
 
-<div class="block-card">
-<div class="section-title">Ссылки</div>
-<div class="links-container">
-<a class="link-item tiktok" href="https://www.tiktok.com/@depriced" target="_blank" rel="noopener">
-<div><div class="link-title">TikTok @depriced</div><span class="link-subtitle">Открыть профиль</span></div>
-<div class="link-icon">↗</div>
-</a>
-<a class="link-item" href="/">
-<div><div class="link-title">depriced.online</div><span class="link-subtitle">Вернуться на главный сайт</span></div>
-<div class="link-icon">↗</div>
-</a>
-</div>
-</div>
-</section>
+        <!-- LEFT -->
+        <div class="column">
+            <header class="block-card profile-header">
+                <img src="https://raw.githubusercontent.com/depr1ced/direct-link-page/refs/heads/main/Lappland.jpg"
+                     alt="Avatar"
+                     class="avatar">
 
-<section class="column">
-<div class="block-card">
-<div class="section-title">Доступ приложения</div>
-<div class="specs-list">
-<div class="spec-item"><div class="spec-label">user.info.basic</div><div class="spec-value">Имя профиля и базовая информация аккаунта</div></div>
-<div class="spec-item"><div class="spec-label">video.list</div><div class="spec-value">Чтение списка публичных TikTok-видео</div></div>
-<div class="spec-item"><div class="spec-label">Использование</div><div class="spec-value">Определение нового видео и отправка анонса ботом</div></div>
-</div>
-</div>
+                <div class="profile-info">
+                    <h1 class="profile-name">Depriced</h1>
 
-<div class="block-card">
-<div class="section-title">OAuth</div>
-<div class="specs-list">
-<div class="spec-item"><div class="spec-label">Web / Desktop URL</div><div class="spec-value">https://depriced.online/tiktok</div></div>
-<div class="spec-item"><div class="spec-label">Redirect URI</div><div class="spec-value">https://depriced.online/tiktok/callback</div></div>
-<div class="spec-item"><div class="spec-label">Scopes</div><div class="spec-value">user.info.basic, video.list</div></div>
-</div>
-</div>
+                    <p class="profile-desc">
+                        Здесь собраны все мои социальные сети. Выбирай платформу и присоединяйся к комьюнити!
+                    </p>
 
-<div class="block-card">
-<div class="section-title">Конфиденциальность</div>
-<p class="notice"><strong>Client Secret и refresh token хранятся только на сервере.</strong> Страница не получает пароль TikTok. Авторизация выполняется через официальный Login Kit TikTok.</p>
-</div>
-</section>
-</main>
+                    <div class="contact-btns">
+                        <a href="https://t.me/depriced"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn-outline tg-btn">
+                            Telegram
+                        </a>
 
-<script>
-const canvas=document.getElementById('bgCanvas'),ctx=canvas.getContext('2d');let particles=[];
-function resize(){canvas.width=innerWidth*devicePixelRatio;canvas.height=innerHeight*devicePixelRatio;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);particles=Array.from({length:Math.min(80,Math.floor(innerWidth/18))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.4+.3,vx:(Math.random()-.5)*.12,vy:(Math.random()-.5)*.12,a:Math.random()*.35+.08}))}
-function draw(){ctx.clearRect(0,0,innerWidth,innerHeight);const g=ctx.createRadialGradient(innerWidth*.5,innerHeight*.45,0,innerWidth*.5,innerHeight*.45,Math.max(innerWidth,innerHeight)*.7);g.addColorStop(0,'rgba(88,28,135,.13)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,0,innerWidth,innerHeight);for(const p of particles){p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=innerWidth;if(p.x>innerWidth)p.x=0;if(p.y<0)p.y=innerHeight;if(p.y>innerHeight)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(167,139,250,${p.a})`;ctx.fill()}requestAnimationFrame(draw)}
-addEventListener('resize',resize);resize();draw();
-</script>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=depriced.dev@gmail.com"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn-outline mail-btn">
+                            Email
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <div class="block-card">
+                <h2 class="section-title">Links</h2>
+
+                <div class="links-container">
+                    <a href="https://t.me/depriced_live"
+                       class="link-item telegram"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <div class="link-left">
+                            <div>
+                                <div class="link-title">Telegram</div>
+                                <span class="link-subtitle">Анонсы, лайф и чат с сабами</span>
+                            </div>
+                        </div>
+                        <div class="link-icon">↗</div>
+                    </a>
+
+                    <a href="https://tiktok.com/@depriced"
+                       class="link-item tiktok"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <div class="link-left">
+                            <div>
+                                <div class="link-title">TikTok</div>
+                                <span class="link-subtitle">Прямые трансляции и короткие видео</span>
+                            </div>
+                        </div>
+                        <div class="link-icon">↗</div>
+                    </a>
+
+                    <a href="https://twitch.tv/depreciated_genius"
+                       class="link-item twitch"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <div class="link-left">
+                            <div>
+                                <div class="link-title">Twitch</div>
+                                <span class="link-subtitle">Прямые трансляции</span>
+                            </div>
+                        </div>
+                        <div class="link-icon">↗</div>
+                    </a>
+
+                    <a href="https://www.donationalerts.com/r/depriced"
+                       class="link-item donate"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <div class="link-left">
+                            <div>
+                                <div class="link-title">DonationAlerts</div>
+                                <span class="link-subtitle">Поддержать развитие канала</span>
+                            </div>
+                        </div>
+                        <div class="link-icon">↗</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="column">
+
+            <div class="block-card tiktok-card">
+                <div class="integration-head">
+                    <div>
+                        <div class="section-title" style="margin-bottom:8px;">TikTok Integration</div>
+                        <div class="integration-title">𓆩 DEPRICED LIVE BOT 𓆪</div>
+                    </div>
+
+                    <span class="status __STATUS_CLASS__">__STATUS_TEXT__</span>
+                </div>
+
+                <p class="integration-desc">
+                    Подключи TikTok-аккаунт, чтобы бот мог официально читать список опубликованных видео
+                    и автоматически отправлять уведомления о новых роликах в Discord и Telegram.
+                </p>
+
+                <a class="tiktok-login" href="/tiktok/login">
+                    <span>♪</span>
+                    Продолжить с TikTok
+                </a>
+
+                <div class="permission-list">
+                    <div class="permission-item">
+                        <div class="permission-name">user.info.basic</div>
+                        <span class="permission-desc">
+                            Базовая информация профиля TikTok.
+                        </span>
+                    </div>
+
+                    <div class="permission-item">
+                        <div class="permission-name">video.list</div>
+                        <span class="permission-desc">
+                            Чтение списка опубликованных публичных видео для определения нового ролика.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="oauth-box">
+                    <div class="oauth-row">
+                        <div class="oauth-label">Web / Desktop URL</div>
+                        <div class="oauth-value">https://depriced.online/tiktok</div>
+                    </div>
+
+                    <div class="oauth-row">
+                        <div class="oauth-label">Redirect URI</div>
+                        <div class="oauth-value">https://depriced.online/tiktok/callback</div>
+                    </div>
+                </div>
+
+                <p class="security-note">
+                    <strong>Безопасность:</strong> пароль TikTok не передаётся сайту.
+                    Авторизация проходит на стороне TikTok. Client Secret и refresh token должны храниться только на сервере.
+                </p>
+            </div>
+
+            <div class="block-card">
+                <h2 class="section-title">My Setup & Gadgets</h2>
+
+                <div class="tabs-header">
+                    <button class="tab-btn active" onclick="openTab(event, 'pc-specs')">Компоненты ПК</button>
+                    <button class="tab-btn" onclick="openTab(event, 'peripherals')">Периферия</button>
+                    <button class="tab-btn" onclick="openTab(event, 'gadgets')">Гаджеты</button>
+                </div>
+
+                <div class="tabs-content-wrapper">
+                    <div id="pc-specs" class="specs-list active fade-in">
+                        <div class="spec-item">
+                            <span class="spec-label">Процессор</span>
+                            <span class="spec-value">Intel i3-13100F</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Видеокарта</span>
+                            <span class="spec-value">Gigabyte RTX 4060 Aero OC</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Материнская плата</span>
+                            <span class="spec-value">Msi B760 Gaming Plus Wi-Fi</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Оперативная память</span>
+                            <span class="spec-value">Kingston Fury Beast 32GB DDR5</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Охлаждение</span>
+                            <span class="spec-value">ID-Cooling Frozn A400</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Блок питания</span>
+                            <span class="spec-value">Gigabyte GP-UD850GM 850 Вт</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Память</span>
+                            <span class="spec-value">SSD: Samsung 990 Evo 1TB | Samsung 990 Evo 512GB | Kingston 118GB</span>
+                            <span class="spec-value">HDD: WD Blue 1TB</span>
+                        </div>
+                    </div>
+
+                    <div id="peripherals" class="specs-list">
+                        <div class="spec-item">
+                            <span class="spec-label">Монитор 1</span>
+                            <span class="spec-value">Tehnicom (300Hz)</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Монитор 2</span>
+                            <span class="spec-value">Samsung (60Hz)</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Графический планшет</span>
+                            <span class="spec-value">Gaomon S620</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Клавиатура</span>
+                            <span class="spec-value">Mchose Ace68HE</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Мышь</span>
+                            <span class="spec-value">A4tech bloody W60 MAX</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Микрофон</span>
+                            <span class="spec-value">Fifine A8</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Наушники</span>
+                            <span class="spec-value">A4Tech Bloody M320</span>
+                        </div>
+                    </div>
+
+                    <div id="gadgets" class="specs-list">
+                        <div class="spec-item">
+                            <span class="spec-label">Основной телефон</span>
+                            <span class="spec-value">Samsung S25</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Второй телефон / Камера на стримах</span>
+                            <span class="spec-value">Samsung S21 FE 5G</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Часы</span>
+                            <span class="spec-value">Galaxy Watch 6 Classic</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Ноутбуки</span>
+                            <span class="spec-value">Neyro Evobook 15 | Asus X550CC</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function openTab(event, tabId) {
+            const currentActiveList = document.querySelector('.specs-list.active');
+            const targetList = document.getElementById(tabId);
+
+            if (currentActiveList === targetList) return;
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            if (currentActiveList) {
+                currentActiveList.classList.remove('fade-in');
+
+                setTimeout(() => {
+                    currentActiveList.classList.remove('active');
+                    targetList.classList.add('active');
+
+                    setTimeout(() => {
+                        targetList.classList.add('fade-in');
+                    }, 20);
+                }, 200);
+            } else {
+                targetList.classList.add('active');
+                targetList.classList.add('fade-in');
+            }
+        }
+    </script>
+
+    <script>
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let particles = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.radius = Math.random() * 1.5 + 0.5;
+                this.alpha = Math.random();
+                this.targetAlpha = Math.random();
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                if (Math.abs(this.alpha - this.targetAlpha) < 0.02) {
+                    this.targetAlpha = Math.random() * 0.8 + 0.1;
+                }
+
+                this.alpha += (this.targetAlpha - this.alpha) * 0.01;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(200, 180, 255, ${this.alpha})`;
+                ctx.fill();
+            }
+        }
+
+        const particleCount = window.innerWidth < 900 ? 50 : 120;
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
 </body>
 </html>
