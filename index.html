@@ -6,7 +6,9 @@
     
     <title>Depriced | Links & Setup</title>
     
-    <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/depr1ced/direct-link-page/refs/heads/main/Depriced Logo Small.png">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/depr1ced/direct-link-page/refs/heads/main/Depriced%20Logo%20Small.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/depr1ced/direct-link-page/refs/heads/main/Depriced%20Logo%20Small.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/depr1ced/direct-link-page/refs/heads/main/Depriced%20Logo%20Small.png">
 
     <style>
         /* Базовые настройки и шрифты */
@@ -16,6 +18,21 @@
             padding: 0;
         }
 
+
+        /* Базовая защита от выделения и перетаскивания */
+        html, body, body * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        img {
+            -webkit-user-drag: none;
+            user-drag: none;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: #000;
@@ -23,10 +40,10 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center; 
+            align-items: flex-start;
             overflow-x: hidden;
             position: relative;
-            padding: 40px 20px;
+            padding: 116px 20px 40px;
         }
 
         /* Канвас для частиц на фоне */
@@ -37,7 +54,7 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            background-color: #030303;
+            background-color: #010101;
         }
 
         /* Новая двухколоночная сетка */
@@ -48,7 +65,8 @@
             grid-template-columns: 1fr 1fr; 
             gap: 24px;
             z-index: 1;
-            align-items: start; 
+            align-items: start;
+            margin-top: 20px;
         }
 
         /* Контейнеры внутри колонок */
@@ -60,11 +78,11 @@
 
         /* Общий стиль блоков */
         .block-card {
-            background: #050505;
+            background: #030303;
             border: 1px solid #3b0764;
             border-radius: 24px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: none;
         }
 
         /* Заголовки секций */
@@ -152,7 +170,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #0a0a0c;
+            background: #050506;
             border: 1px solid #2e1065;
             border-radius: 16px;
             padding: 20px 25px;
@@ -213,6 +231,46 @@
             background: rgba(255, 115, 0, 0.04);
         }
         .link-item.donate:hover .link-icon { color: #ff7300; }
+
+
+        .legal-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .legal-link {
+            flex: 1;
+            min-width: 170px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: #050506;
+            border: 1px solid #2e1065;
+            border-radius: 16px;
+            padding: 15px 18px;
+            color: #e4e4e7;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .legal-link:hover {
+            border-color: #581c87;
+            background: rgba(88, 28, 135, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .legal-link span:last-child {
+            color: #71717a;
+            transition: color 0.25s ease;
+        }
+
+        .legal-link:hover span:last-child {
+            color: #a78bfa;
+        }
 
         /* --- ПРАВАЯ КОЛОНКА --- */
         
@@ -313,6 +371,14 @@
         }
 
         @media (max-width: 600px) {
+            body {
+                padding: 68px 12px 24px;
+            }
+
+            .layout-grid {
+                margin-top: 12px;
+            }
+
             .profile-header {
                 flex-direction: column;
                 text-align: center;
@@ -396,6 +462,22 @@
                             </div>
                         </div>
                         <div class="link-icon">↗</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="block-card">
+                <h2 class="section-title">Legal</h2>
+
+                <div class="legal-links">
+                    <a href="https://depriced.online/privacy-policy" class="legal-link">
+                        <span>Privacy Policy</span>
+                        <span>↗</span>
+                    </a>
+
+                    <a href="https://depriced.online/terms-of-service" class="legal-link">
+                        <span>Terms of Service</span>
+                        <span>↗</span>
                     </a>
                 </div>
             </div>
@@ -590,5 +672,36 @@
         }
         animate();
     </script>
+
+    <script>
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('copy', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('cut', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('selectstart', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            const key = e.key.toLowerCase();
+
+            if ((e.ctrlKey || e.metaKey) && ['c', 'x', 'a'].includes(key)) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
 </body>
 </html>
