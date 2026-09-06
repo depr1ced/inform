@@ -7,7 +7,12 @@
     <meta name="description" content="Условия использования сайта depriced.online">
     <title>Terms of Service — DEPRICED</title>
 
+    <link rel="icon" type="image/png" href="/avatar.png">
+    <link rel="shortcut icon" type="image/png" href="/avatar.png">
+    <link rel="apple-touch-icon" href="/avatar.png">
+
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -39,30 +44,28 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            padding: 40px 20px;
+            padding: 0 20px 40px;
         }
 
         #bgCanvas {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            background-color: #030303;
+            background-color: #010101;
         }
 
         .page {
             width: 100%;
             max-width: 1100px;
-            margin: 0 auto;
-            z-index: 1;
+            margin: 24px auto 0;
             position: relative;
-            padding-top: 18px;
+            z-index: 1;
         }
 
         .block-card {
-            background: #050505;
+            background: #030303;
             border: 1px solid #3b0764;
             border-radius: 24px;
             padding: 30px;
@@ -118,10 +121,7 @@
 
         .hero {
             margin-bottom: 24px;
-            position: relative;
-            overflow: hidden;
         }
-
 
         .section-title {
             font-size: 0.8rem;
@@ -136,17 +136,17 @@
             font-weight: 800;
             line-height: 1.05;
             margin-bottom: 18px;
-            max-width: 850px;
+            max-width: 900px;
             background: linear-gradient(90deg, #ffffff, #a78bfa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero p {
+        .hero p,
+        .legal-section p {
             color: #a1a1aa;
-            font-size: 0.98rem;
-            line-height: 1.7;
-            max-width: 820px;
+            font-size: 0.94rem;
+            line-height: 1.75;
         }
 
         .updated {
@@ -154,7 +154,7 @@
             margin-top: 18px;
             color: #a78bfa;
             border: 1px solid #2e1065;
-            background: #0a0a0c;
+            background: #050506;
             border-radius: 16px;
             padding: 9px 14px;
             font-size: 0.8rem;
@@ -166,6 +166,7 @@
             grid-template-columns: 300px 1fr;
             gap: 24px;
             align-items: start;
+            margin-top: 24px;
         }
 
         .toc {
@@ -204,34 +205,28 @@
             gap: 24px;
         }
 
-        .terms-section {
+        .legal-section {
             scroll-margin-top: 20px;
         }
 
-        .terms-section h2 {
+        .legal-section h2 {
             font-size: 1.35rem;
             line-height: 1.3;
             margin-bottom: 16px;
             color: #f4f4f5;
         }
 
-        .terms-section p {
-            color: #a1a1aa;
-            line-height: 1.75;
-            font-size: 0.94rem;
-        }
-
-        .terms-section p + p {
+        .legal-section p + p {
             margin-top: 13px;
         }
 
-        .terms-section ul {
+        .legal-section ul {
             margin-top: 13px;
             padding-left: 22px;
             color: #a1a1aa;
         }
 
-        .terms-section li {
+        .legal-section li {
             line-height: 1.65;
             margin-bottom: 7px;
         }
@@ -239,7 +234,7 @@
         .notice {
             margin-top: 16px;
             padding: 16px 18px;
-            background: #0a0a0c;
+            background: #050506;
             border: 1px solid #2e1065;
             border-radius: 16px;
             color: #c4b5fd;
@@ -255,7 +250,7 @@
         }
 
         .contact-item {
-            background: #0a0a0c;
+            background: #050506;
             border: 1px solid #2e1065;
             border-radius: 16px;
             padding: 16px 18px;
@@ -300,8 +295,16 @@
         }
 
         @media (max-width: 600px) {
+            .page {
+                margin-top: 24px;
+            }
+
             body {
-                padding: 24px 12px;
+                padding: 0 12px 24px;
+            }
+
+            .layout-grid {
+                margin-top: 12px;
             }
 
             .block-card {
@@ -313,10 +316,6 @@
                 align-items: flex-start;
             }
 
-            .brand {
-                font-size: 0.9rem;
-            }
-
             .back-btn {
                 padding: 7px 13px;
                 font-size: 0.78rem;
@@ -326,6 +325,7 @@
                 font-size: 2.25rem;
             }
         }
+
     </style>
 </head>
 
@@ -335,7 +335,7 @@
     <main class="page">
         <div class="topbar">
             <a href="https://depriced.online" class="brand">
-                <img src="avatar.png" alt="DEPRICED avatar" class="brand-avatar">
+                <img src="/avatar.png" alt="DEPRICED avatar" class="brand-avatar">
                 <span>DEPRICED</span>
             </a>
 
@@ -345,274 +345,138 @@
         <section class="block-card hero">
             <div class="section-title">depriced.online / legal</div>
             <h1>Terms of Service</h1>
-            <p>
-                Настоящие Условия использования регулируют доступ к сайту depriced.online,
-                его поддоменам, функциям и связанным сервисам.
-            </p>
+            <p>Настоящие Условия использования регулируют доступ к сайту depriced.online, его поддоменам, функциям и связанным сервисам.</p>
             <div class="updated">Последнее обновление: 6 сентября 2026 года</div>
         </section>
 
         <div class="layout-grid">
             <aside class="block-card toc">
                 <div class="section-title">Содержание</div>
-
                 <nav class="toc-links">
-                    <a class="toc-link" href="#intro">О правилах</a>
-                    <a class="toc-link" href="#usage">1. Использование Сайта</a>
-                    <a class="toc-link" href="#oauth">2. Сторонняя авторизация</a>
-                    <a class="toc-link" href="#permissions">3. Доступ к аккаунтам</a>
-                    <a class="toc-link" href="#content">4. Пользовательский контент</a>
-                    <a class="toc-link" href="#ip">5. Интеллектуальная собственность</a>
-                    <a class="toc-link" href="#third-party">6. Сторонние сервисы</a>
-                    <a class="toc-link" href="#availability">7. Доступность Сайта</a>
-                    <a class="toc-link" href="#changes-functions">8. Изменение функций</a>
-                    <a class="toc-link" href="#liability">9. Ответственность</a>
-                    <a class="toc-link" href="#account-security">10. Безопасность аккаунта</a>
-                    <a class="toc-link" href="#prohibited">11. Запрещённые действия</a>
-                    <a class="toc-link" href="#suspension">12. Блокировка доступа</a>
-                    <a class="toc-link" href="#privacy">13. Конфиденциальность</a>
-                    <a class="toc-link" href="#terms-changes">14. Изменение Условий</a>
-                    <a class="toc-link" href="#law">15. Применимое право</a>
-                    <a class="toc-link" href="#contacts">16. Контакты</a>
+                    <a class="toc-link" href="#intro">О правилах</a><a class="toc-link" href="#usage">1. Использование Сайта</a><a class="toc-link" href="#oauth">2. Авторизация через сторонние сервисы</a><a class="toc-link" href="#permissions">3. Доступ к аккаунтам и разрешения</a><a class="toc-link" href="#content">4. Пользовательский контент</a><a class="toc-link" href="#ip">5. Интеллектуальная собственность</a><a class="toc-link" href="#third-party">6. Сторонние сервисы и ссылки</a><a class="toc-link" href="#availability">7. Доступность Сайта</a><a class="toc-link" href="#changes-functions">8. Изменение или прекращение функций</a><a class="toc-link" href="#liability">9. Ограничение ответственности</a><a class="toc-link" href="#account-security">10. Безопасность аккаунта</a><a class="toc-link" href="#prohibited">11. Запрещённые действия</a><a class="toc-link" href="#suspension">12. Блокировка доступа</a><a class="toc-link" href="#privacy">13. Конфиденциальность</a><a class="toc-link" href="#terms-changes">14. Изменение настоящих Условий</a><a class="toc-link" href="#law">15. Применимое законодательство</a><a class="toc-link" href="#contacts">16. Контакты</a>
                 </nav>
             </aside>
 
             <div class="content-column">
-                <section class="block-card terms-section" id="intro">
-                    <div class="section-title">О правилах</div>
-                    <p>
-                        Используя Сайт, пользователь подтверждает, что ознакомился
-                        с настоящими Условиями и соглашается соблюдать их.
-                    </p>
-                </section>
-
-                <section class="block-card terms-section" id="usage">
-                    <div class="section-title">Использование</div>
-                    <h2>1. Использование Сайта</h2>
-                    <p>Пользователь обязуется использовать Сайт только законным способом и не совершать действий, которые могут:</p>
-                    <ul>
-                        <li>нарушать работу Сайта;</li>
-                        <li>создавать чрезмерную нагрузку на серверы;</li>
-                        <li>мешать другим пользователям пользоваться Сайтом;</li>
-                        <li>нарушать применимое законодательство;</li>
-                        <li>нарушать права третьих лиц;</li>
-                        <li>использоваться для обхода ограничений сторонних платформ или сервисов;</li>
-                        <li>использоваться для получения несанкционированного доступа к данным, аккаунтам или системам.</li>
-                    </ul>
-                    <p>Администрация Сайта вправе ограничить или прекратить доступ пользователя при нарушении настоящих Условий.</p>
-                </section>
-
-                <section class="block-card terms-section" id="oauth">
-                    <div class="section-title">OAuth</div>
-                    <h2>2. Авторизация через сторонние сервисы</h2>
-                    <p>Некоторые функции Сайта могут использовать авторизацию через сторонние платформы, включая:</p>
-                    <ul>
-                        <li>TikTok;</li>
-                        <li>Twitch;</li>
-                        <li>Discord;</li>
-                        <li>Telegram;</li>
-                        <li>другие поддерживаемые сервисы.</li>
-                    </ul>
-                    <p>При использовании сторонней авторизации пользователь также соглашается соблюдать правила и условия соответствующей платформы.</p>
-                    <p>Сайт не контролирует доступность, работу или изменения сторонних сервисов.</p>
-                </section>
-
-                <section class="block-card terms-section" id="permissions">
-                    <div class="section-title">Разрешения</div>
-                    <h2>3. Доступ к аккаунтам и разрешения</h2>
-                    <p>
-                        Если пользователь предоставляет Сайту доступ к своему аккаунту через OAuth
-                        или другой официальный механизм авторизации, Сайт использует только те разрешения,
-                        которые пользователь явно подтвердил.
-                    </p>
-                    <p>
-                        Пользователь может в любой момент отозвать предоставленный доступ через настройки
-                        соответствующей сторонней платформы, если такая возможность предусмотрена сервисом.
-                    </p>
-                    <div class="notice">Сайт не запрашивает и не хранит пароль пользователя от стороннего аккаунта.</div>
-                </section>
-
-                <section class="block-card terms-section" id="content">
-                    <div class="section-title">Контент</div>
-                    <h2>4. Пользовательский контент</h2>
-                    <p>
-                        Если Сайт позволяет пользователю отправлять, публиковать, загружать или передавать
-                        контент, пользователь несёт ответственность за такой контент.
-                    </p>
-                    <p>Пользователь гарантирует, что размещаемый им контент:</p>
-                    <ul>
-                        <li>не нарушает законодательство;</li>
-                        <li>не нарушает авторские и иные права третьих лиц;</li>
-                        <li>не содержит вредоносного программного обеспечения;</li>
-                        <li>не используется для мошенничества, спама или злоупотреблений.</li>
-                    </ul>
-                    <p>Администрация Сайта вправе удалить или ограничить доступ к контенту, нарушающему настоящие Условия.</p>
-                </section>
-
-                <section class="block-card terms-section" id="ip">
-                    <div class="section-title">Права</div>
-                    <h2>5. Интеллектуальная собственность</h2>
-                    <p>
-                        Если не указано иное, дизайн, структура, программный код, графические элементы,
-                        тексты и другие материалы Сайта принадлежат владельцу Сайта или используются на законных основаниях.
-                    </p>
-                    <p>
-                        Запрещается копировать, распространять, изменять или использовать материалы Сайта
-                        в коммерческих целях без разрешения правообладателя, за исключением случаев,
-                        разрешённых законодательством.
-                    </p>
-                    <p>Названия, логотипы и товарные знаки сторонних платформ принадлежат их соответствующим владельцам.</p>
-                </section>
-
-                <section class="block-card terms-section" id="third-party">
-                    <div class="section-title">Третьи лица</div>
-                    <h2>6. Сторонние сервисы и ссылки</h2>
-                    <p>Сайт может содержать ссылки на сторонние сайты и использовать API, сервисы или функции третьих лиц.</p>
-                    <p>Администрация Сайта не несёт ответственности за:</p>
-                    <ul>
-                        <li>содержание сторонних сайтов;</li>
-                        <li>доступность сторонних сервисов;</li>
-                        <li>изменения их API;</li>
-                        <li>действия или решения сторонних платформ;</li>
-                        <li>блокировку или ограничение стороннего аккаунта пользователя;</li>
-                        <li>обработку данных сторонними сервисами.</li>
-                    </ul>
-                    <p>Использование сторонних ресурсов осуществляется пользователем самостоятельно и в соответствии с их правилами.</p>
-                </section>
-
-                <section class="block-card terms-section" id="availability">
-                    <div class="section-title">Доступность</div>
-                    <h2>7. Доступность Сайта</h2>
-                    <p>Администрация не гарантирует, что Сайт будет работать непрерывно, без ошибок или без временных ограничений.</p>
-                    <p>Работа Сайта может быть временно приостановлена в связи с:</p>
-                    <ul>
-                        <li>техническим обслуживанием;</li>
-                        <li>обновлением;</li>
-                        <li>исправлением ошибок;</li>
-                        <li>сбоями серверов или хостинга;</li>
-                        <li>проблемами со сторонними API;</li>
-                        <li>обстоятельствами, не зависящими от администрации.</li>
-                    </ul>
-                    <p>Отдельное уведомление о технических работах не гарантируется.</p>
-                </section>
-
-                <section class="block-card terms-section" id="changes-functions">
-                    <div class="section-title">Функции</div>
-                    <h2>8. Изменение или прекращение функций</h2>
-                    <p>Администрация Сайта вправе в любое время:</p>
-                    <ul>
-                        <li>добавлять новые функции;</li>
-                        <li>изменять существующие функции;</li>
-                        <li>временно ограничивать отдельные функции;</li>
-                        <li>прекращать поддержку отдельных сервисов или интеграций;</li>
-                        <li>полностью прекратить работу Сайта.</li>
-                    </ul>
-                    <p>Администрация не обязана сохранять функции в неизменном виде.</p>
-                </section>
-
-                <section class="block-card terms-section" id="liability">
-                    <div class="section-title">Ответственность</div>
-                    <h2>9. Ограничение ответственности</h2>
-                    <p>Сайт предоставляется по принципу «как есть» и «по мере доступности».</p>
-                    <p>В пределах, допускаемых применимым законодательством, администрация не несёт ответственности за:</p>
-                    <ul>
-                        <li>потерю данных;</li>
-                        <li>потерю доступа к стороннему аккаунту;</li>
-                        <li>временную недоступность Сайта;</li>
-                        <li>ошибки сторонних сервисов;</li>
-                        <li>действия пользователя;</li>
-                        <li>последствия использования информации или функций Сайта;</li>
-                        <li>косвенные или непредвиденные убытки.</li>
-                    </ul>
-                    <p>Пользователь самостоятельно принимает решение об использовании Сайта и связанных с ним функций.</p>
-                </section>
-
-                <section class="block-card terms-section" id="account-security">
-                    <div class="section-title">Безопасность</div>
-                    <h2>10. Безопасность аккаунта</h2>
-                    <p>Пользователь обязан самостоятельно обеспечивать безопасность:</p>
-                    <ul>
-                        <li>своего устройства;</li>
-                        <li>браузера;</li>
-                        <li>сторонних аккаунтов;</li>
-                        <li>токенов и сессий;</li>
-                        <li>данных авторизации.</li>
-                    </ul>
-                    <p>
-                        При подозрении на несанкционированный доступ пользователь должен отозвать
-                        сторонние разрешения и принять необходимые меры безопасности.
-                    </p>
-                </section>
-
-                <section class="block-card terms-section" id="prohibited">
-                    <div class="section-title">Ограничения</div>
-                    <h2>11. Запрещённые действия</h2>
-                    <p>При использовании Сайта запрещается:</p>
-                    <ul>
-                        <li>пытаться получить несанкционированный доступ к серверу или чужим данным;</li>
-                        <li>обходить технические ограничения;</li>
-                        <li>использовать автоматизированные средства для создания чрезмерной нагрузки;</li>
-                        <li>распространять вредоносный код;</li>
-                        <li>использовать Сайт для мошенничества;</li>
-                        <li>выдавать себя за другого пользователя;</li>
-                        <li>использовать Сайт для нарушения правил сторонних сервисов;</li>
-                        <li>вмешиваться в нормальную работу Сайта или связанных систем.</li>
-                    </ul>
-                </section>
-
-                <section class="block-card terms-section" id="suspension">
-                    <div class="section-title">Доступ</div>
-                    <h2>12. Блокировка доступа</h2>
-                    <p>Администрация вправе временно или полностью ограничить доступ пользователя к Сайту при:</p>
-                    <ul>
-                        <li>нарушении настоящих Условий;</li>
-                        <li>попытке взлома;</li>
-                        <li>злоупотреблении функциями;</li>
-                        <li>подозрительной активности;</li>
-                        <li>необходимости защиты Сайта или других пользователей.</li>
-                    </ul>
-                    <p>В случае серьёзного нарушения доступ может быть прекращён без предварительного уведомления.</p>
-                </section>
-
-                <section class="block-card terms-section" id="privacy">
-                    <div class="section-title">Privacy</div>
-                    <h2>13. Конфиденциальность</h2>
-                    <p>Обработка персональных данных регулируется отдельной Политикой конфиденциальности Сайта.</p>
-                    <p>Продолжая использовать Сайт, пользователь подтверждает ознакомление с Политикой конфиденциальности.</p>
-                </section>
-
-                <section class="block-card terms-section" id="terms-changes">
-                    <div class="section-title">Обновления</div>
-                    <h2>14. Изменение настоящих Условий</h2>
-                    <p>Настоящие Условия могут периодически изменяться.</p>
-                    <p>Актуальная версия публикуется на Сайте с указанием даты последнего обновления.</p>
-                    <p>Продолжение использования Сайта после публикации изменений означает ознакомление пользователя с новой редакцией Условий.</p>
-                </section>
-
-                <section class="block-card terms-section" id="law">
-                    <div class="section-title">Право</div>
-                    <h2>15. Применимое законодательство</h2>
-                    <p>
-                        Настоящие Условия регулируются применимым законодательством в зависимости от места
-                        деятельности владельца Сайта и требований, применимых к соответствующей ситуации.
-                    </p>
-                    <p>
-                        Если отдельное положение настоящих Условий признаётся недействительным,
-                        остальные положения продолжают действовать.
-                    </p>
-                </section>
-
-                <section class="block-card terms-section" id="contacts">
+                <section class="block-card legal-section" id="intro">
+<div class="section-title">О правилах</div>
+<p>Используя Сайт, пользователь подтверждает, что ознакомился с настоящими Условиями и соглашается соблюдать их.</p>
+</section>
+<section class="block-card legal-section" id="usage">
+<div class="section-title">Использование</div>
+<h2>1. Использование Сайта</h2>
+<p>Пользователь обязуется использовать Сайт только законным способом и не совершать действий, которые могут:</p>
+<ul><li>нарушать работу Сайта;</li><li>создавать чрезмерную нагрузку на серверы;</li><li>мешать другим пользователям пользоваться Сайтом;</li><li>нарушать применимое законодательство;</li><li>нарушать права третьих лиц;</li><li>использоваться для обхода ограничений сторонних платформ или сервисов;</li><li>использоваться для получения несанкционированного доступа к данным, аккаунтам или системам.</li></ul>
+<p>Администрация Сайта вправе ограничить или прекратить доступ пользователя при нарушении настоящих Условий.</p>
+</section>
+<section class="block-card legal-section" id="oauth">
+<div class="section-title">OAuth</div>
+<h2>2. Авторизация через сторонние сервисы</h2>
+<p>Некоторые функции Сайта могут использовать авторизацию через сторонние платформы, включая TikTok, Twitch, Discord, Telegram и другие поддерживаемые сервисы.</p>
+<p>При использовании сторонней авторизации пользователь также соглашается соблюдать правила и условия соответствующей платформы.</p>
+<p>Сайт не контролирует доступность, работу или изменения сторонних сервисов.</p>
+</section>
+<section class="block-card legal-section" id="permissions">
+<div class="section-title">Разрешения</div>
+<h2>3. Доступ к аккаунтам и разрешения</h2>
+<p>Если пользователь предоставляет Сайту доступ к своему аккаунту через OAuth или другой официальный механизм авторизации, Сайт использует только те разрешения, которые пользователь явно подтвердил.</p>
+<p>Пользователь может в любой момент отозвать предоставленный доступ через настройки соответствующей сторонней платформы, если такая возможность предусмотрена сервисом.</p>
+<div class="notice">Сайт не запрашивает и не хранит пароль пользователя от стороннего аккаунта.</div>
+</section>
+<section class="block-card legal-section" id="content">
+<div class="section-title">Контент</div>
+<h2>4. Пользовательский контент</h2>
+<p>Если Сайт позволяет пользователю отправлять, публиковать, загружать или передавать контент, пользователь несёт ответственность за такой контент.</p>
+<p>Пользователь гарантирует, что размещаемый им контент:</p>
+<ul><li>не нарушает законодательство;</li><li>не нарушает авторские и иные права третьих лиц;</li><li>не содержит вредоносного программного обеспечения;</li><li>не используется для мошенничества, спама или злоупотреблений.</li></ul>
+</section>
+<section class="block-card legal-section" id="ip">
+<div class="section-title">Права</div>
+<h2>5. Интеллектуальная собственность</h2>
+<p>Если не указано иное, дизайн, структура, программный код, графические элементы, тексты и другие материалы Сайта принадлежат владельцу Сайта или используются на законных основаниях.</p>
+<p>Запрещается копировать, распространять, изменять или использовать материалы Сайта в коммерческих целях без разрешения правообладателя, за исключением случаев, разрешённых законодательством.</p>
+<p>Названия, логотипы и товарные знаки сторонних платформ принадлежат их соответствующим владельцам.</p>
+</section>
+<section class="block-card legal-section" id="third-party">
+<div class="section-title">Третьи лица</div>
+<h2>6. Сторонние сервисы и ссылки</h2>
+<p>Сайт может содержать ссылки на сторонние сайты и использовать API, сервисы или функции третьих лиц.</p>
+<p>Администрация Сайта не несёт ответственности за:</p>
+<ul><li>содержание сторонних сайтов;</li><li>доступность сторонних сервисов;</li><li>изменения их API;</li><li>действия или решения сторонних платформ;</li><li>блокировку или ограничение стороннего аккаунта пользователя;</li><li>обработку данных сторонними сервисами.</li></ul>
+<p>Использование сторонних ресурсов осуществляется пользователем самостоятельно и в соответствии с их правилами.</p>
+</section>
+<section class="block-card legal-section" id="availability">
+<div class="section-title">Доступность</div>
+<h2>7. Доступность Сайта</h2>
+<p>Администрация не гарантирует, что Сайт будет работать непрерывно, без ошибок или без временных ограничений.</p>
+<p>Работа Сайта может быть временно приостановлена в связи с:</p>
+<ul><li>техническим обслуживанием;</li><li>обновлением;</li><li>исправлением ошибок;</li><li>сбоями серверов или хостинга;</li><li>проблемами со сторонними API;</li><li>обстоятельствами, не зависящими от администрации.</li></ul>
+<p>Отдельное уведомление о технических работах не гарантируется.</p>
+</section>
+<section class="block-card legal-section" id="changes-functions">
+<div class="section-title">Функции</div>
+<h2>8. Изменение или прекращение функций</h2>
+<p>Администрация Сайта вправе в любое время:</p>
+<ul><li>добавлять новые функции;</li><li>изменять существующие функции;</li><li>временно ограничивать отдельные функции;</li><li>прекращать поддержку отдельных сервисов или интеграций;</li><li>полностью прекратить работу Сайта.</li></ul>
+<p>Администрация не обязана сохранять функции в неизменном виде.</p>
+</section>
+<section class="block-card legal-section" id="liability">
+<div class="section-title">Ответственность</div>
+<h2>9. Ограничение ответственности</h2>
+<p>Сайт предоставляется по принципу «как есть» и «по мере доступности».</p>
+<p>В пределах, допускаемых применимым законодательством, администрация не несёт ответственности за:</p>
+<ul><li>потерю данных;</li><li>потерю доступа к стороннему аккаунту;</li><li>временную недоступность Сайта;</li><li>ошибки сторонних сервисов;</li><li>действия пользователя;</li><li>последствия использования информации или функций Сайта;</li><li>косвенные или непредвиденные убытки.</li></ul>
+<p>Пользователь самостоятельно принимает решение об использовании Сайта и связанных с ним функций.</p>
+</section>
+<section class="block-card legal-section" id="account-security">
+<div class="section-title">Безопасность</div>
+<h2>10. Безопасность аккаунта</h2>
+<p>Пользователь обязан самостоятельно обеспечивать безопасность:</p>
+<ul><li>своего устройства;</li><li>браузера;</li><li>сторонних аккаунтов;</li><li>токенов и сессий;</li><li>данных авторизации.</li></ul>
+<p>При подозрении на несанкционированный доступ пользователь должен отозвать сторонние разрешения и принять необходимые меры безопасности.</p>
+</section>
+<section class="block-card legal-section" id="prohibited">
+<div class="section-title">Ограничения</div>
+<h2>11. Запрещённые действия</h2>
+<p>При использовании Сайта запрещается:</p>
+<ul><li>пытаться получить несанкционированный доступ к серверу или чужим данным;</li><li>обходить технические ограничения;</li><li>использовать автоматизированные средства для создания чрезмерной нагрузки;</li><li>распространять вредоносный код;</li><li>использовать Сайт для мошенничества;</li><li>выдавать себя за другого пользователя;</li><li>использовать Сайт для нарушения правил сторонних сервисов;</li><li>вмешиваться в нормальную работу Сайта или связанных систем.</li></ul>
+</section>
+<section class="block-card legal-section" id="suspension">
+<div class="section-title">Доступ</div>
+<h2>12. Блокировка доступа</h2>
+<p>Администрация вправе временно или полностью ограничить доступ пользователя к Сайту при:</p>
+<ul><li>нарушении настоящих Условий;</li><li>попытке взлома;</li><li>злоупотреблении функциями;</li><li>подозрительной активности;</li><li>необходимости защиты Сайта или других пользователей.</li></ul>
+<p>В случае серьёзного нарушения доступ может быть прекращён без предварительного уведомления.</p>
+</section>
+<section class="block-card legal-section" id="privacy">
+<div class="section-title">Privacy</div>
+<h2>13. Конфиденциальность</h2>
+<p>Обработка персональных данных регулируется отдельной Политикой конфиденциальности Сайта.</p>
+<p>Продолжая использовать Сайт, пользователь подтверждает ознакомление с Политикой конфиденциальности.</p>
+</section>
+<section class="block-card legal-section" id="terms-changes">
+<div class="section-title">Обновления</div>
+<h2>14. Изменение настоящих Условий</h2>
+<p>Настоящие Условия могут периодически изменяться.</p>
+<p>Актуальная версия публикуется на Сайте с указанием даты последнего обновления.</p>
+<p>Продолжение использования Сайта после публикации изменений означает ознакомление пользователя с новой редакцией Условий.</p>
+</section>
+<section class="block-card legal-section" id="law">
+<div class="section-title">Право</div>
+<h2>15. Применимое законодательство</h2>
+<p>Настоящие Условия регулируются применимым законодательством в зависимости от места деятельности владельца Сайта и требований, применимых к соответствующей ситуации.</p>
+<p>Если отдельное положение настоящих Условий признаётся недействительным, остальные положения продолжают действовать.</p>
+</section>
+                
+                <section class="block-card legal-section" id="contacts">
                     <div class="section-title">Контакты</div>
                     <h2>16. Контакты</h2>
-                    <p>По вопросам, связанным с настоящими Условиями, пользователь может связаться с администрацией Сайта.</p>
+                    <p>По вопросам, связанным с этой страницей, пользователь может связаться с администрацией Сайта.</p>
 
                     <div class="contact-box">
                         <div class="contact-item">
                             <span class="contact-label">Сайт</span>
-                            <div class="contact-value">
-                                <a href="https://depriced.online">depriced.online</a>
-                            </div>
+                            <div class="contact-value"><a href="https://depriced.online">depriced.online</a></div>
                         </div>
 
                         <div class="contact-item">
@@ -622,19 +486,17 @@
 
                         <div class="contact-item">
                             <span class="contact-label">Email</span>
-                            <div class="contact-value">
-                                <a href="mailto:depriced.dev@gmail.com">depriced.dev@gmail.com</a>
-                            </div>
+                            <div class="contact-value"><a href="mailto:depriced.dev@gmail.com">depriced.dev@gmail.com</a></div>
                         </div>
                     </div>
                 </section>
+    
             </div>
         </div>
 
-        <footer>
-            © 2026 DEPRICED · depriced.online
-        </footer>
+        <footer>© 2026 DEPRICED · depriced.online</footer>
     </main>
+
 
     <script>
         const canvas = document.getElementById('bgCanvas');
@@ -682,40 +544,22 @@
             requestAnimationFrame(animate);
         }
 
-        window.addEventListener('resize', resizeCanvas);
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('copy', e => e.preventDefault());
+        document.addEventListener('cut', e => e.preventDefault());
+        document.addEventListener('selectstart', e => e.preventDefault());
+        document.addEventListener('dragstart', e => e.preventDefault());
 
-        resizeCanvas();
-        animate();
-    </script>
-
-    <script>
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-        });
-
-        document.addEventListener('copy', function (e) {
-            e.preventDefault();
-        });
-
-        document.addEventListener('cut', function (e) {
-            e.preventDefault();
-        });
-
-        document.addEventListener('selectstart', function (e) {
-            e.preventDefault();
-        });
-
-        document.addEventListener('dragstart', function (e) {
-            e.preventDefault();
-        });
-
-        document.addEventListener('keydown', function (e) {
+        document.addEventListener('keydown', e => {
             const key = e.key.toLowerCase();
-
             if ((e.ctrlKey || e.metaKey) && ['c', 'x', 'a'].includes(key)) {
                 e.preventDefault();
             }
         });
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        animate();
     </script>
 
 </body>
