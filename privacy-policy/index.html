@@ -18,6 +18,20 @@
             scroll-behavior: smooth;
         }
 
+        html, body, body * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        img {
+            -webkit-user-drag: none;
+            user-drag: none;
+            pointer-events: none;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: #000;
@@ -106,19 +120,6 @@
             margin-bottom: 24px;
             position: relative;
             overflow: hidden;
-        }
-
-        .hero::after {
-            content: "";
-            position: absolute;
-            width: 260px;
-            height: 260px;
-            right: -120px;
-            top: -120px;
-            border-radius: 50%;
-            background: rgba(88, 28, 135, 0.2);
-            filter: blur(25px);
-            pointer-events: none;
         }
 
         .section-title {
@@ -672,7 +673,9 @@
 
                         <div class="contact-item">
                             <span class="contact-label">Email</span>
-                            <div class="contact-value">depriced.dev@gmail.com</div>
+                            <div class="contact-value">
+                                <a href="mailto:depriced.dev@gmail.com">depriced.dev@gmail.com</a>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -729,6 +732,34 @@
 
             requestAnimationFrame(animate);
         }
+
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('copy', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('cut', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('selectstart', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            const key = e.key.toLowerCase();
+
+            if ((e.ctrlKey || e.metaKey) && ['c', 'x', 'a'].includes(key)) {
+                e.preventDefault();
+            }
+        });
 
         window.addEventListener('resize', resizeCanvas);
 
