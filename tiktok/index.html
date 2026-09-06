@@ -1,396 +1,305 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Depriced | TikTok Integration</title>
 
-    <title>Depriced | TikTok Integration</title>
+<link rel="icon" type="image/png"
+href="https://raw.githubusercontent.com/depr1ced/direct-link-page/refs/heads/main/Depriced%20Logo%20Small.png">
 
-    <link rel="icon"
-          type="image/jpeg"
-          href="https://raw.githubusercontent.com/depr1ced/direct-link-page/refs/heads/main/Depriced%20Logo%20Small.png">
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            position: relative;
-            padding: 40px 20px;
-        }
-
-        #bgCanvas {
-            position: fixed;
-            inset: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            background-color: #030303;
-        }
-
-        .page-wrap {
-            width: 100%;
-            max-width: 760px;
-            z-index: 1;
-        }
-
-        .block-card {
-            background: #050505;
-            border: 1px solid #3b0764;
-            border-radius: 24px;
-            padding: 34px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            margin-bottom: 28px;
-        }
-
-        .avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 2px solid #581c87;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-
-        .profile-info {
-            flex: 1;
-        }
-
-        .profile-name {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            background: linear-gradient(90deg, #ffffff, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .profile-desc {
-            color: #a1a1aa;
-            font-size: 0.92rem;
-            line-height: 1.6;
-        }
-
-        .section-title {
-            font-size: 0.78rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #71717a;
-            margin-bottom: 14px;
-        }
-
-        .integration-box {
-            background: #0a0a0c;
-            border: 1px solid #2e1065;
-            border-radius: 18px;
-            padding: 22px;
-        }
-
-        .integration-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 14px;
-            margin-bottom: 14px;
-        }
-
-        .integration-title {
-            font-size: 1.2rem;
-            font-weight: 800;
-        }
-
-        .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            border-radius: 999px;
-            border: 1px solid #3f3f46;
-            background: #09090b;
-            color: #d4d4d8;
-            font-size: 0.78rem;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        .status::before {
-            content: "";
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #71717a;
-        }
-
-        .status.connected {
-            color: #d8b4fe;
-            border-color: #581c87;
-            background: rgba(88, 28, 135, 0.18);
-        }
-
-        .status.connected::before {
-            background: #a78bfa;
-            box-shadow: 0 0 12px rgba(167, 139, 250, 0.65);
-        }
-
-        .status.error {
-            color: #fecaca;
-            border-color: #7f1d1d;
-            background: rgba(127, 29, 29, 0.18);
-        }
-
-        .status.error::before {
-            background: #ef4444;
-        }
-
-        .integration-text {
-            color: #a1a1aa;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .tiktok-login {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: #fff;
-            color: #050505;
-            border: 1px solid #fff;
-            padding: 15px 20px;
-            border-radius: 16px;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 800;
-            transition: all 0.25s ease;
-        }
-
-        .tiktok-login:hover {
-            transform: translateY(-2px);
-            box-shadow: -4px 4px 0 #25f4ee, 4px -4px 0 #fe2c55;
-        }
-
-        .permissions {
-            margin-top: 20px;
-            border-top: 1px solid rgba(88, 28, 135, 0.25);
-        }
-
-        .permission-item {
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(88, 28, 135, 0.2);
-        }
-
-        .permission-item:last-child {
-            border-bottom: none;
-        }
-
-        .permission-name {
-            color: #e4e4e7;
-            font-size: 0.9rem;
-            font-weight: 700;
-        }
-
-        .permission-desc {
-            display: block;
-            color: #71717a;
-            font-size: 0.78rem;
-            margin-top: 5px;
-            line-height: 1.45;
-        }
-
-        .security-note {
-            color: #71717a;
-            font-size: 0.76rem;
-            line-height: 1.55;
-            margin-top: 18px;
-        }
-
-        .security-note strong {
-            color: #a1a1aa;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 18px;
-            color: #a78bfa;
-            text-decoration: none;
-            font-size: 0.84rem;
-            font-weight: 600;
-        }
-
-        .back-link:hover {
-            color: #c4b5fd;
-        }
-
-        @media (max-width: 600px) {
-            .profile-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .block-card {
-                padding: 24px;
-            }
-
-            .integration-head {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-    </style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#030303;--card:#060607;--inner:#0a0a0d;--border:#3b0764;
+--border2:#2e1065;--purple:#a78bfa;--text:#fff;--muted:#a1a1aa;
+--dim:#71717a;--green:#86efac
+}
+body{
+font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+background:#030303;color:#fff;min-height:100vh;padding:0 20px 48px;overflow-x:hidden
+}
+#bgCanvas{position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;background:#030303}
+.page-wrap{width:100%;max-width:790px;margin:48px auto 0;position:relative;z-index:1}
+.card{
+background:rgba(5,5,6,.97);border:1px solid var(--border);border-radius:24px;
+padding:34px;box-shadow:0 18px 55px rgba(0,0,0,.52)
+}
+.header{display:flex;align-items:center;gap:22px;margin-bottom:28px}
+.avatar{width:88px;height:88px;object-fit:cover;border-radius:50%;border:2px solid #581c87}
+.name{
+font-size:2rem;font-weight:850;margin-bottom:7px;
+background:linear-gradient(90deg,#fff,#c4b5fd);
+-webkit-background-clip:text;-webkit-text-fill-color:transparent
+}
+.desc{color:var(--muted);line-height:1.6;font-size:.92rem}
+.section-label{
+margin:24px 0 13px;color:var(--dim);text-transform:uppercase;
+letter-spacing:2px;font-size:.76rem
+}
+.integration{background:var(--inner);border:1px solid var(--border2);border-radius:18px;padding:22px}
+.integration-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:13px}
+.integration-title{font-size:1.2rem;font-weight:850}
+.status{
+display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
+background:rgba(88,28,135,.16);border:1px solid #581c87;color:#d8b4fe;
+font-weight:800;font-size:.76rem;white-space:nowrap
+}
+.status::before{
+content:"";width:8px;height:8px;border-radius:50%;background:#a78bfa;
+box-shadow:0 0 12px rgba(167,139,250,.55)
+}
+.status.ready{border-color:#14532d;background:rgba(20,83,45,.15);color:var(--green)}
+.status.ready::before{background:var(--green);box-shadow:0 0 12px rgba(134,239,172,.45)}
+.text{color:var(--muted);font-size:.9rem;line-height:1.62}
+.actions{display:grid;gap:10px;margin-top:20px}
+.tiktok-login{
+width:100%;display:flex;align-items:center;justify-content:center;gap:11px;
+min-height:56px;padding:15px 20px;border:1px solid #fff;border-radius:16px;
+background:#fff;color:#050505;text-decoration:none;font-size:.96rem;font-weight:850;
+transition:transform .18s ease,box-shadow .18s ease
+}
+.tiktok-login:hover{transform:translateY(-2px);box-shadow:-4px 4px 0 #25f4ee,4px -4px 0 #fe2c55}
+.secondary{
+width:100%;display:flex;align-items:center;justify-content:center;min-height:48px;
+padding:12px 18px;border-radius:14px;border:1px solid #34264a;background:#100d17;
+color:#c4b5fd;text-decoration:none;font-size:.86rem;font-weight:750
+}
+.secondary:hover{background:#171020;border-color:#4c1d95}
+.hint{
+margin-top:14px;padding:13px 15px;border:1px solid rgba(88,28,135,.22);
+border-radius:13px;background:#070708;color:#77717f;font-size:.77rem;line-height:1.5
+}
+.hint strong{color:#b9b4c1}
+code{
+font-family:Consolas,monospace;color:#d8b4fe;background:rgba(88,28,135,.12);
+border:1px solid rgba(88,28,135,.2);padding:2px 5px;border-radius:6px
+}
+.permissions{margin-top:18px;border-top:1px solid rgba(88,28,135,.25)}
+.permission{padding:14px 0;border-bottom:1px solid rgba(88,28,135,.18)}
+.permission:last-child{border-bottom:0;padding-bottom:0}
+.permission b{font-size:.88rem;color:#e4e4e7}
+.permission span{display:block;margin-top:5px;color:var(--dim);font-size:.77rem;line-height:1.45}
+.security{
+margin-top:18px;padding:15px 16px;border-radius:14px;background:rgba(88,28,135,.075);
+border:1px solid rgba(88,28,135,.17);color:#82808a;font-size:.77rem;line-height:1.55
+}
+.security strong{color:#c5c2ca}
+.steps{display:grid;gap:10px}
+.step{
+display:grid;grid-template-columns:38px 1fr;gap:13px;padding:15px 16px;
+border-radius:14px;border:1px solid rgba(88,28,135,.22);background:#08080a
+}
+.num{
+width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+border-radius:12px;border:1px solid #4c1d95;background:#1d1230;color:#d8b4fe;
+font-weight:850;font-size:.8rem
+}
+.step-title{font-size:.9rem;font-weight:800;margin:2px 0 4px}
+.step-desc{color:var(--dim);font-size:.78rem;line-height:1.48}
+.back{display:inline-block;margin-top:20px;color:var(--purple);font-size:.84rem;font-weight:700;text-decoration:none}
+.back:hover{color:#c4b5fd}
+.toast{
+position:fixed;left:50%;bottom:26px;transform:translate(-50%,18px);
+max-width:calc(100vw - 32px);padding:12px 16px;border-radius:13px;background:#17131f;
+border:1px solid #49316b;color:#ddd8e7;box-shadow:0 15px 45px rgba(0,0,0,.55);
+opacity:0;pointer-events:none;transition:.2s ease;font-size:.8rem;z-index:20
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:620px){
+body{padding:0 14px 30px}.page-wrap{margin-top:30px}.card{padding:22px;border-radius:20px}
+.header{align-items:flex-start}.avatar{width:70px;height:70px}.name{font-size:1.65rem}
+.integration-head{flex-direction:column;align-items:flex-start}
+}
+</style>
 </head>
 
 <body>
-    <canvas id="bgCanvas"></canvas>
+<canvas id="bgCanvas"></canvas>
 
-    <main class="page-wrap">
-        <section class="block-card">
+<main class="page-wrap">
+<section class="card">
 
-            <div class="profile-header">
-                <img
-                    src="https://raw.githubusercontent.com/depr1ced/direct-link-page/refs/heads/main/Lappland.jpg"
-                    alt="Depriced avatar"
-                    class="avatar">
+<div class="header">
+<img class="avatar"
+src="https://raw.githubusercontent.com/depr1ced/direct-link-page/refs/heads/main/Lappland.jpg"
+alt="Depriced">
+<div>
+<h1 class="name">Depriced</h1>
+<p class="desc">
+Подключение TikTok к 𓆩 DEPRICED LIVE BOT 𓆪 через DEPRICED Control Center.
+</p>
+</div>
+</div>
 
-                <div class="profile-info">
-                    <h1 class="profile-name">Depriced</h1>
-                    <p class="profile-desc">
-                        Подключение TikTok к 𓆩 DEPRICED LIVE BOT 𓆪
-                        для автоматического отслеживания новых видео.
-                    </p>
-                </div>
-            </div>
+<div class="section-label">TikTok Integration</div>
 
-            <div class="section-title">TikTok Integration</div>
+<div class="integration">
+<div class="integration-head">
+<div class="integration-title">Подключить TikTok</div>
+<span id="localStatus" class="status">Проверяю TikTok Auth</span>
+</div>
 
-            <div class="integration-box">
-                <div class="integration-head">
-                    <div class="integration-title">Подключить TikTok</div>
-                    <span class="status __STATUS_CLASS__">__STATUS_TEXT__</span>
-                </div>
+<p class="text">
+Вход проходит через официальный TikTok Login Kit.
+Control Center создаёт PKCE-сессию, принимает локальный callback
+и сохраняет access token + refresh token.
+</p>
 
-                <p class="integration-text">
-                    Авторизуй аккаунт TikTok через официальный Login Kit.
-                    Бот будет использовать доступ только для чтения базовой информации
-                    профиля и списка опубликованных публичных видео.
-                </p>
+<div class="actions">
+<a id="loginButton" class="tiktok-login"
+href="http://127.0.0.1:3455/oauth">
+<span>♪</span>
+Продолжить с TikTok
+</a>
 
-                <a class="tiktok-login" href="/tiktok/login">
-                    <span>♪</span>
-                    Продолжить с TikTok
-                </a>
+<a class="secondary"
+href="http://127.0.0.1:3455/"
+target="_blank" rel="noopener">
+Проверить TikTok Auth
+</a>
+</div>
 
-                <div class="permissions">
-                    <div class="permission-item">
-                        <div class="permission-name">user.info.basic</div>
-                        <span class="permission-desc">
-                            Базовая информация TikTok-профиля.
-                        </span>
-                    </div>
+<div class="hint">
+<strong>Перед входом:</strong>
+в DEPRICED Control Center открой <strong>TikTok Auth</strong> и нажми
+<strong>«Запустить»</strong>. После этого нажми кнопку
+<strong>«Продолжить с TikTok»</strong> выше.
+</div>
 
-                    <div class="permission-item">
-                        <div class="permission-name">video.list</div>
-                        <span class="permission-desc">
-                            Чтение списка публичных видео для определения новых публикаций.
-                        </span>
-                    </div>
-                </div>
+<div class="permissions">
+<div class="permission">
+<b>user.info.basic</b>
+<span>Базовая информация авторизованного TikTok-профиля.</span>
+</div>
+<div class="permission">
+<b>video.list</b>
+<span>Чтение опубликованных видео для определения новых публикаций.</span>
+</div>
+</div>
 
-                <p class="security-note">
-                    <strong>Пароль TikTok сайт не получает.</strong>
-                    Авторизация проходит на стороне TikTok, а Client Secret и refresh token
-                    хранятся только на сервере.
-                </p>
-            </div>
+<div class="security">
+<strong>Пароль TikTok сайт не получает.</strong>
+Ввод логина и подтверждение разрешений происходят непосредственно на TikTok.
+Callback возвращается на <code>http://127.0.0.1:3455/callback/</code>.
+</div>
+</div>
 
-            <a class="back-link" href="https://depriced.online">← Вернуться на depriced.online</a>
-        </section>
-    </main>
+<div class="section-label">Как подключиться</div>
 
-    <script>
-        const canvas = document.getElementById('bgCanvas');
-        const ctx = canvas.getContext('2d');
+<div class="steps">
+<div class="step">
+<div class="num">01</div>
+<div>
+<div class="step-title">Запусти TikTok Auth</div>
+<div class="step-desc">
+Control Center поднимет локальный OAuth-сервис на 127.0.0.1:3455.
+</div>
+</div>
+</div>
 
-        let width, height;
-        let particles = [];
+<div class="step">
+<div class="num">02</div>
+<div>
+<div class="step-title">Продолжить с TikTok</div>
+<div class="step-desc">
+Кнопка на сайте запускает OAuth-сессию с state и PKCE и переводит на TikTok.
+</div>
+</div>
+</div>
 
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
+<div class="step">
+<div class="num">03</div>
+<div>
+<div class="step-title">Войди в TikTok</div>
+<div class="step-desc">
+Авторизуйся на официальной странице TikTok и подтверди разрешения.
+</div>
+</div>
+</div>
 
-        window.addEventListener('resize', resize);
-        resize();
+<div class="step">
+<div class="num">04</div>
+<div>
+<div class="step-title">Готово</div>
+<div class="step-desc">
+Callback возвращается в Control Center, который получает и сохраняет токены.
+</div>
+</div>
+</div>
+</div>
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.3;
-                this.vy = (Math.random() - 0.5) * 0.3;
-                this.radius = Math.random() * 1.5 + 0.5;
-                this.alpha = Math.random();
-                this.targetAlpha = Math.random();
-            }
+<a class="back" href="https://depriced.online">← Вернуться на depriced.online</a>
+</section>
+</main>
 
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
+<div id="toast" class="toast"></div>
 
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
+<script>
+const loginButton=document.getElementById("loginButton");
+const toast=document.getElementById("toast");
+const localStatus=document.getElementById("localStatus");
 
-                if (Math.abs(this.alpha - this.targetAlpha) < 0.02) {
-                    this.targetAlpha = Math.random() * 0.8 + 0.1;
-                }
+function showToast(text){
+toast.textContent=text;
+toast.classList.add("show");
+clearTimeout(window.__toastTimer);
+window.__toastTimer=setTimeout(()=>toast.classList.remove("show"),4200);
+}
 
-                this.alpha += (this.targetAlpha - this.alpha) * 0.01;
-            }
+loginButton.addEventListener("click",()=>{
+showToast("Открываю локальный OAuth → TikTok Login Kit");
+});
 
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(200, 180, 255, ${this.alpha})`;
-                ctx.fill();
-            }
-        }
+(function probe(){
+const img=new Image();
+img.onload=()=>{
+localStatus.textContent="TikTok Auth запущен";
+localStatus.classList.add("ready");
+};
+img.onerror=()=>{
+localStatus.textContent="Запусти TikTok Auth";
+localStatus.classList.remove("ready");
+};
+img.src="http://127.0.0.1:3455/ping.png?t="+Date.now();
+})();
 
-        const particleCount = window.innerWidth < 900 ? 50 : 120;
+const canvas=document.getElementById("bgCanvas");
+const ctx=canvas.getContext("2d");
+let width,height,particles=[];
 
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
+function resize(){
+width=canvas.width=innerWidth;
+height=canvas.height=innerHeight;
+}
+addEventListener("resize",resize);resize();
 
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
+class Particle{
+constructor(){
+this.x=Math.random()*width;this.y=Math.random()*height;
+this.vx=(Math.random()-.5)*.26;this.vy=(Math.random()-.5)*.26;
+this.r=Math.random()*1.3+.45;this.a=Math.random()*.5;this.ta=Math.random()*.5+.08;
+}
+update(){
+this.x+=this.vx;this.y+=this.vy;
+if(this.x<0||this.x>width)this.vx*=-1;
+if(this.y<0||this.y>height)this.vy*=-1;
+if(Math.abs(this.a-this.ta)<.02)this.ta=Math.random()*.5+.08;
+this.a+=(this.ta-this.a)*.01;
+}
+draw(){
+ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+ctx.fillStyle=`rgba(190,170,255,${this.a})`;ctx.fill();
+}
+}
 
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
+for(let i=0;i<(innerWidth<900?42:95);i++)particles.push(new Particle());
 
-            requestAnimationFrame(animate);
-        }
-
-        animate();
-    </script>
+(function animate(){
+ctx.clearRect(0,0,width,height);
+particles.forEach(p=>{p.update();p.draw()});
+requestAnimationFrame(animate);
+})();
+</script>
 </body>
 </html>
